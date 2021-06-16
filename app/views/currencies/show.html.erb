@@ -1,0 +1,41 @@
+<%= form_tag(currencies_show_path, method: "get") do %>
+  <%= text_field_tag(:crypto_search) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% if params[:crypto_search].present? %>
+   <h2><%= "You searched for: #{params[:crypto_search]}" %></h2>
+<% end %>
+
+<% list_of = Currency.all
+  coin = nil
+  list_of.each do |coin_info|
+      if coin_info.name == "#{params[:crypto_search]}"
+        coin = coin_info
+      end   
+  end
+%>
+
+<% def crypto_name(coins)
+    coins != nil ? coins.name : nil 
+   end 
+%>
+<% def crypto_price(coins)
+     coins != nil ? "$ #{coins.current_price.round(2)}" : nil
+   end
+%>
+
+<h4><%= list_of.inspect %></h4>
+<ol>
+  <li><%= coin.inspect %></li>
+  <li><%= crypto_name(coin) %></li>
+  <li><%= crypto_price(coin) %></li>
+  <li><%= list_of.name %></li>
+  <li><%= list_of.first.name %></li>
+</ol>
+
+
+<hr>
+<%= link_to root_path do %>
+  <strong> Back to Index </strong>
+<% end %>

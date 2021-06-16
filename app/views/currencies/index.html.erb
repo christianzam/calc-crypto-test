@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Calculator</title>
+</head>
+<body>
+  <div>
+   <h3> <% currency = Currency.first %> </h3>
+    <span>The first currency of the API response is: <strong><%= currency.name %></strong></span>
+    <ul style="list-style-type: none;">
+    <li>Right now it costs: <%= currency.current_price %></li>
+    <li>The total of 4 of those is: <%= currency.calculate_value(4) %></li>
+    </ul>
+  </div>
+
+  <div>
+    <%= link_to currencies_show_path do %>
+      <strong> Back to testing </strong>
+    <% end %>
+  </div>
+</body>
+</html>
