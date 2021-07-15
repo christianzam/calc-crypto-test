@@ -9,59 +9,80 @@
 <body>
   <!-- ============== BANNER SECTION STARTS ============== -->  
   <div class="top-banner-section">
-  <!-- The CSS grid area that displays the image (layer 1) -->
-  <div class="banner-image-div">
-    <img class="banner-image" src="https://images.unsplash.com/photo-1609554496796-c345a5335ceb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Banner Image" />
-  </div>
-  <!-- The CSS grid area that displays the semi-transparent gradient overlay (layer 2) -->
-  <div class="banner-overlay-div"></div>
-  <!-- The CSS grid area that displays the content (layer 3) -->
-  <div class="banner-text-div">
-    <span class="banner-text">
-      <p class="banner-h1-text">Remain relevant in today's <br> Crypto Currency information</p>
-      <p class="banner-body-text">Find real time results and get competitive edge</p>
-      <div class="banner-search">
-        <%= form_tag root_path, method: "get" do %>
-          <%= text_field_tag :crypto_search,
-            params[:crypto_search],
-            :autocomplete => :off,
-            :class => "search-box",
-            placeholder: "Search.."
-          %>
-          <%= button_tag type: "submit", class: "glass-icon" do %>
-            <%= fa_icon "search" %>
-          <% end %>
-        <% end %>
+      <!-- The CSS grid area that displays the image (layer 1) -->
+    <div class="banner-image-div">
+      <img class="banner-image" src="https://images.unsplash.com/photo-1609554496796-c345a5335ceb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Banner Image" />
     </div>
-    </span>
+    <!-- The CSS grid area that displays the semi-transparent gradient overlay (layer 2) -->
+    <div class="banner-overlay-div"></div>
+    <!-- The CSS grid area that displays the content (layer 3) -->
+    <div class="banner-text-div">
+      <span class="banner-text">
+        <p class="banner-h1-text">Remain relevant in today's <br> Crypto Currency information</p>
+        <p class="banner-body-text">Find real time results and get competitive edge</p>
+        <div class="banner-search">
+          <%= form_tag root_path, method: "get" do %>
+            <%= text_field_tag :crypto_search,
+              params[:crypto_search],
+              :autocomplete => :off,
+              :class => "search-box",
+              placeholder: "Search.."
+            %>
+            <%= button_tag type: "submit", class: "glass-icon" do %>
+              <%= fa_icon "search" %>
+            <% end %>
+          <% end %>
+      </div>
+      </span>
+    </div>
+  <!-- ============== SEARCH RESULTS STARTS / HIDDEN  ============== -->
+    <% if params[:crypto_search].present? %>
+      <% @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search].downcase}%") %>
+      <header class="header">
+        <h2>You searched for:<br></h2>
+        <h1> <%= "#{params[:crypto_search].to_s.upcase}" %> </h1>
+      </header>  
+      <div class ="rectangle">
+        <% @currencies.each do |suggestions| %>     
+            <div class="my-container">
+              <%= link_to "https://coinmarketcap.com/currencies/#{params[:crypto_search].to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
+                <div class="card-category">
+                  <ul class="my-list">
+                  <li><h3><%= suggestions.name %></h3> 
+                  <li><strong><%=suggestions.currency_symbol%></strong></li>
+                  <li><%= "$ #{suggestions.current_price.round(4)} USD" %></li>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+        <% end  %>
+      </div>
+    <% end %>
+    <% if params[:crypto_search_info].present? %>
+      <% @currencies_info = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search_info].downcase}%") %>
+      <header class="header">
+        <h2>You searched for:<br></h2>
+        <h1> <%= "#{params[:crypto_search_info].to_s.upcase}" %> </h1>
+      </header>  
+      <div class ="rectangle">
+        <% @currencies_info.each do |suggestions| %>     
+            <div class="my-container">
+              <%= link_to "https://coinmarketcap.com/currencies/#{params[:crypto_search_info].to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
+                <div class="card-category">
+                  <ul class="my-list">
+                  <li><h3><%= suggestions.name %></h3> 
+                  <li><strong><%=suggestions.currency_symbol%></strong></li>
+                  <li><%= "$ #{suggestions.current_price.round(4)} USD" %></li>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+        <% end  %>
+      </div>
+    <% end %>
+<!-- ============== SEARCH RESULTS FINISHED / HIDDEN ============== -->  
   </div>
 <!-- ============== BANNER SECTION FINISHED ============== -->
-
-<!-- ============== SEARCH HEADER SECTION STARTS ============== -->
-      <% if params[:crypto_search].present? %>
-        <% @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search].downcase}%") %>
-        <header class="header">
-          <h2>You searched for:<br></h2>
-          <h1> <%= "#{params[:crypto_search].to_s.upcase}" %> </h1>
-        </header>  
-        <div class ="rectangle">
-          <% @currencies.each do |suggestions| %>     
-              <div class="my-container">
-                <%= link_to "https://coinmarketcap.com/currencies/#{params[:crypto_search].to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
-                  <div class="card-category">
-                    <ul class="my-list">
-                    <li><h3><%= suggestions.name %></h3> 
-                    <li><strong><%=suggestions.currency_symbol%></strong></li>
-                    <li><%= "$ #{suggestions.current_price.round(4)} USD" %></li>
-                    </ul>
-                  </div>
-                <% end %>
-              </div>
-          <% end  %>
-        </div>
-      <% end %> 
-  </div>
-<!-- ============== SEARCH HEADER SECTION FINISHED ============== -->
 
 <!-- ============== INFO CONTAINER SECTION START ============== -->
   <div class="info-container">
@@ -124,8 +145,8 @@
       <div class ="info-search align-middle">
         <span class ="info-label"> Real time information</span>  
         <%= form_tag root_path, method: "get" do %>
-          <%= text_field_tag :crypto_search,
-            params[:crypto_search],
+          <%= text_field_tag :crypto_search_info,
+            params[:crypto_search_info],
             :autocomplete => :off,
             :class => "search-box",
             placeholder: "Search.."
