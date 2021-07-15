@@ -7,19 +7,175 @@
   <title>Crypto Calculator</title>
 </head>
 <body>
-  <div>
-   <h3> <% currency = Currency.first %> </h3>
-    <span>The first currency of the API response is: <strong><%= currency.name %></strong></span>
-    <ul style="list-style-type: none;">
-    <li>Right now it costs: <%= currency.current_price %></li>
-    <li>The total of 4 of those is: <%= currency.calculate_value(4) %></li>
-    </ul>
+  <!-- ============== BANNER SECTION STARTS ============== -->  
+  <div class="top-banner-section">
+  <!-- The CSS grid area that displays the image (layer 1) -->
+  <div class="banner-image-div">
+    <img class="banner-image" src="https://images.unsplash.com/photo-1609554496796-c345a5335ceb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Banner Image" />
   </div>
+  <!-- The CSS grid area that displays the semi-transparent gradient overlay (layer 2) -->
+  <div class="banner-overlay-div"></div>
+  <!-- The CSS grid area that displays the content (layer 3) -->
+  <div class="banner-text-div">
+    <span class="banner-text">
+      <p class="banner-h1-text">Remain relevant in today's <br> Crypto Currency information</p>
+      <p class="banner-body-text">Find real time results and get competitive edge</p>
+      <div class="banner-search">
+        <%= form_tag root_path, method: "get" do %>
+          <%= text_field_tag :crypto_search,
+            params[:crypto_search],
+            :autocomplete => :off,
+            :class => "search-box",
+            placeholder: "Search.."
+          %>
+          <%= button_tag type: "submit", class: "glass-icon" do %>
+            <%= fa_icon "search" %>
+          <% end %>
+        <% end %>
+    </div>
+    </span>
+  </div>
+<!-- ============== BANNER SECTION FINISHED ============== -->
 
-  <div>
-    <%= link_to currencies_show_path do %>
-      <strong> Back to testing </strong>
-    <% end %>
+<!-- ============== SEARCH HEADER SECTION STARTS ============== -->
+      <% if params[:crypto_search].present? %>
+        <% @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search].downcase}%") %>
+        <header class="header">
+          <h2>You searched for:<br></h2>
+          <h1> <%= "#{params[:crypto_search].to_s.upcase}" %> </h1>
+        </header>  
+        <div class ="rectangle">
+          <% @currencies.each do |suggestions| %>     
+              <div class="my-container">
+                <%= link_to "https://coinmarketcap.com/currencies/#{params[:crypto_search].to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
+                  <div class="card-category">
+                    <ul class="my-list">
+                    <li><h3><%= suggestions.name %></h3> 
+                    <li><strong><%=suggestions.currency_symbol%></strong></li>
+                    <li><%= "$ #{suggestions.current_price.round(4)} USD" %></li>
+                    </ul>
+                  </div>
+                <% end %>
+              </div>
+          <% end  %>
+        </div>
+      <% end %> 
   </div>
+<!-- ============== SEARCH HEADER SECTION FINISHED ============== -->
+
+<!-- ============== INFO CONTAINER SECTION START ============== -->
+  <div class="info-container">
+    <div class="info-paragraph">
+      <my-h1>What Is Cryptocurrency?</my-h1><br>
+      <my-h1>&nbsp;Here’s What You Should Know</my-h1><br><br>
+      <p class="p-l 5">
+        A cryptocurrency (or “crypto”) is a digital currency that can be used to buy goods and services, 
+        Cryptocurrencies work using a technology called blockchain. Blockchain is a decentralized technology 
+        spread across many computers that manages and records transactions. Part of the appeal of this technology is 
+        its security.
+      <br><br>
+        More than 10,000 different cryptocurrencies are traded publicly, according to CoinMarketCap.com, a market 
+        research website. And cryptocurrencies continue to proliferate, raising money through initial coin offerings, 
+        or ICOs. The total value of all cryptocurrencies on July 9, 2021, was more than $1.4 trillion
+      <br>
+          <a href="https://en.wikipedia.org/wiki/Digital_currency" target ="blank">More info</a>
+      </p>  
+    </div>
+    <div class="info-table">
+      <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th>ICON</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Symbol</th>
+          <th>MaxSupply</th>
+        </tr>
+        <tr>
+          <td><img src="bitcoin.png" style='width: 30px; height: 30px;' alt=""></td>
+          <td><%= coin_name("Bitcoin") %></td>
+          <td>$ <%= coin_price("Bitcoin") %> USD</td>
+          <td><strong><%= coin_sym("Bitcoin") %></strong></td>
+          <td><%= coin_supply("Bitcoin") %></td>
+        </tr>
+        <tr>
+          <td><img src="ethereum.png" style='width: 30px; height: 30px;' alt=""></td>
+          <td><%= coin_name("Ethereum") %></td>
+          <td>$ <%= coin_price("Ethereum") %> USD</td>
+          <td><strong><%= coin_sym("Ethereum")%></strong></td>
+          <td><%= coin_supply("Ethereum") %></td>
+        </tr>
+        <tr>
+          <td><img src="litecoin.png" style='width: 30px; height: 30px;' alt=""></td>
+          <td><%= coin_name("Litecoin") %></td>
+          <td>$ <%= coin_price("Litecoin") %> USD</td>
+          <td><strong><%= coin_sym("Litecoin") %></strong></td>
+          <td><%= coin_supply("Litecoin") %></td>
+        </tr>
+        <tr>
+          <td><img src="dogecoin.png" style='width: 30px; height: 30px;' alt=""></td>
+          <td><%= coin_name("Dogecoin") %></td>
+          <td>$ <%= coin_price("Dogecoin") %> USD </td>
+          <td><strong><%= coin_sym("Dogecoin") %></strong></td>
+          <td><%= coin_supply("Dogecoin") %></td>
+        </tr>
+      </table>
+      </div>
+      <div class ="info-search align-middle">
+        <span class ="info-label"> Real time information</span>  
+        <%= form_tag root_path, method: "get" do %>
+          <%= text_field_tag :crypto_search,
+            params[:crypto_search],
+            :autocomplete => :off,
+            :class => "search-box",
+            placeholder: "Search.."
+          %>
+        <% end %>
+      </div>  
+    </div>
+  </div>
+<!-- ============== INFO CONTAINER SECTION FINISHED ============== -->
+<!--  <%  if params[:crypto_search].blank? %>
+        YOUR SEARCH 
+      <% end %>
+-->
+<!-- ================================================== SPLIT CONTAINER STARTS ================================================== -->
+  <div class="split-container">
+    <div class="split-screen left"> <!-- LEFT SIDE OF CONTAINER -->
+      <img src="https://images.unsplash.com/photo-1612696877544-9796e268bfcf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1897&q=80" alt="image">
+    </div>
+<!-- ============== COIN CAP INFO STARTS ============== -->    
+    <div class="split-screen right"> <!-- RIGHT SIDE OF CONTAINER -->
+      <div class="centered">
+        <br><br>
+        <my-h1>How to buy and protect yourself ?</my-h1><br><br>
+        <p>
+          If you’re looking to buy a cryptocurrency in an ICO, read the fine print in the company’s prospectus for this information: 
+          <br>
+          <ul style="list-style-type: none; font-size: larger;">
+          <li>Who owns the company? An identifiable and well-known owner is a positive sign.</li>
+          <li>Are there other major investors who are investing in it? It’s a good sign if other well-known investors want a piece of the currency.</li>
+          <li>Will you own a stake in the company or just currency or tokens? This distinction is important. </li>
+          <li>Owning a stake means you get to participate in its earnings (you’re an owner), while buying tokens simply means you're entitled to use them, like chips in a casino.</li>
+          <li>Is the currency already developed, or is the company looking to raise money to develop it? The further along the product, the less risky it is.</li>
+          </ul>
+        </p>
+      </div>
+    </div>   
+<!-- ============== COIN CAP INFO ENDSs ============== -->    
+  </div>
+<!-- ================================================== SPLIT CONTAINER ENDS ================================================== --> 
 </body>
 </html>
+
+<!--
+        <h3> <% currency = Currency.first %> </h3>
+        <span>The first currency of the Seeds File is: <strong><%= currency.name %></strong></span>
+        <ul style="list-style-type: none;">
+        <li>From the API it costs: <%= currency.current_price %></li>
+        <li>The total of 4 of those is: <%= currency.calculate_value(4) %></li>
+        <li>From the API current name: <%= currency.current_name %> </li>
+        <li>From DB symbol: <%= currency.currency_symbol %></li>
+        <li>The slug: <%= currency.slug %></li>
+        </ul>
+-->

@@ -1,0 +1,74 @@
+/*
+ *= require font-awesome
+ */
+
+// Graphical variables
+@import "config/bootstrap_variables";
+@import "config/colors";
+@import "config/fonts";
+
+// CSS partials
+@import "components/banner";
+@import "components/search_bar";
+@import "components/currency_grid";
+@import "components/navbar";
+@import "components/split-screen";
+@import "components/info-section";
+
+
+
+// External libraries
+@import "bootstrap/scss/bootstrap";
+@import "font-awesome";
+
+
+:root {
+  --transition-1: all 0.3s ease-in-out;
+  --transition-2: all 0.2s ease-in-out;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+my-h1 {
+  color: black;
+  font-size: 40px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  line-height: 35px;
+}
+
+p {
+  color: black;
+  font-size:larger;
+  font-family: $links;
+}
+
+h1 {
+  color: steelblue;
+  transition: var(--transition-1);
+}
+
+// h1 > a {
+//   text-decoration: none;
+//   color: rgb(122, 206, 255);
+// }
+
+// h1 > a::selection {
+//   color: rgb(122, 180, 255);
+// }
+
+h3 {
+  margin: 2px;
+  // color: #c6efff;
+}
+
+h4::selection {
+  color: #c6e8ff;
+}
+
+.mode {
+  margin-top: 20px;
+}

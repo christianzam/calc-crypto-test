@@ -1,0 +1,51 @@
+
+
+<%= form_tag currencies_show_path, method: "get" do %>
+          <%= text_field_tag :crypto_search,
+            params[:crypto_search],
+            :autocomplete => :off, 
+            placeholder: "Bitcoin, Litecoin... etc"
+          %>
+        <% end %>
+    
+      <% if params[:crypto_search].present? %>
+        <% @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search].downcase}%") 
+            
+          all_currencies_array = @currencies.all
+
+          #  coin = nil
+          # all_currencies_array.each do |coin_info|
+          #   if coin_info.name == "#{params[:crypto_search]}"
+          #     coin = coin_info
+          #   elsif coin_info.name.downcase == "#{params[:crypto_search]}"
+          #     coin = coin_info
+          #   end   
+          # end
+          
+          # result = all_currencies_array.each { |crypto_data| crypto_data == "#{params[:crypto_search]}" }
+          # list_suggested_results = result.map { |y| y.name }
+
+          # name_class_array = result.select { |z| z.name == "#{params[:crypto_search]}" }
+          # just_name = name_class_array.collect { |i| i.name }
+        %>
+        <%# list_suggested_results.each do |suggestion| %>
+          <%#= suggestion %>
+        <%# end %>
+        <% all_currencies_array.each do |suggestions| %>
+          <%= suggestions.name %> 
+        <% end  %>
+      <% end %>
+
+    <h3><%= "You searched for: #{params[:crypto_search]}" %></h3>
+
+    <%# RESULTS IF MATCHES NAME %>
+    <% if params[:crypto_search].present? %>
+      <% @currencies.each do |x| 
+        if x == x.current_name %>
+        <%= x.current_name %> 
+        <%= x.current_price %>
+        <%= x.currency_symbol %>
+        <% end %>
+      <% end %>
+    <% end %>
+<%# RESULTS IF MATCHES NAME END%>

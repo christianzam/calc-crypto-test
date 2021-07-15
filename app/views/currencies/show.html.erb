@@ -1,41 +1,206 @@
-<%= form_tag(currencies_show_path, method: "get") do %>
-  <%= text_field_tag(:crypto_search) %>
-  <%= submit_tag("Search") %>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Calculator</title>
+  </head>
+    <body>
+      <div class="container">
+        <header class="header">
+          <h1>CRYPTO CURRENCY SEARCH</h1>
+        </header>
+        <div class="body" align="center">
+          <%= form_tag currencies_show_path, method: "get" do %>
+            <div class="autoComplete_wrapper">
+              <%= text_field_tag :papaya, 
+              params[:papaya], 
+              :autocomplete => :off, 
+              :id => "autoComplete" %>
+              <%# <%= button_tag %>
+            </div>
+          <% end %>
+          <div class="mode">
+            <h4>Search Mode</h4>
+            <div class="toggle">
+              <div class="toggler">Strict</div>
+            </div>
+          </div>
+          <div class="selection" id="choice"></div>
+        </div>
+      </div>
 
-<% if params[:crypto_search].present? %>
-   <h2><%= "You searched for: #{params[:crypto_search]}" %></h2>
-<% end %>
+     <%= @random_quote %>
+      <span><br><br></span> 
 
-<% list_of = Currency.all
-  coin = nil
-  list_of.each do |coin_info|
-      if coin_info.name == "#{params[:crypto_search]}"
-        coin = coin_info
-      end   
-  end
-%>
+    <%= link_to root_path do %>
+      <strong> Back to testing </strong>
+    <% end %>
 
-<% def crypto_name(coins)
-    coins != nil ? coins.name : nil 
-   end 
-%>
-<% def crypto_price(coins)
-     coins != nil ? "$ #{coins.current_price.round(2)}" : nil
-   end
-%>
+  <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.1.4/dist/autoComplete.min.js"></script>
+  <script>
+  // The autoComplete.js Engine instance creator
 
-<h4><%= list_of.inspect %></h4>
-<ol>
-  <li><%= coin.inspect %></li>
-  <li><%= crypto_name(coin) %></li>
-  <li><%= crypto_price(coin) %></li>
-  <li><%= list_of.name %></li>
-  <li><%= list_of.first.name %></li>
-</ol>
+  const autoCompleteJS = new autoComplete({
+    data: {
+      src: async () => {
+        try {
+          // Loading placeholder text
+          document
+            .getElementById("autoComplete")
+            .setAttribute("placeholder", "Loading...");
+          // Fetch External Data Source
+          const source = await fetch("https://christianzam.github.io/cryptocurrency-json/names.json");
+          const data = await source.json();
+          // Post Loading placeholder text
+          document
+            .getElementById("autoComplete")
+            .setAttribute("placeholder", autoCompleteJS.placeHolder);
+          // Returns Fetched data
+          return data;
+        } catch (error) {
+          return error;
+        }
+      },
+      keys: ["symbol", "name", "color"],
+      cache: true,
+      filter: (list) => {
+        // Filter duplicates
+        // incase of multiple data keys usage
+        const filteredResults = Array.from(
+          new Set(list.map((value) => value.match))
+        ).map((crypto) => {
+          return list.find((value) => value.match === crypto);
+        });
 
+        return filteredResults;
+      }
+    },
+    placeHolder: "Search e.g. Bitcoin, Litecoin...",
+    resultsList: {
+      element: (list, data) => {
+        const info = document.createElement("p");
+        if (data.results.length > 0) {
+          info.innerHTML = `Displaying <strong style="color: rgba(122, 202, 255, 0.7);">${data.results.length}</strong> out of <strong style="color: rgba(122, 202, 255, 0.7);">${data.matches.length}</strong> results`;
+        } else {
+          info.innerHTML = `Found <strong style="color: rgba(122, 202, 255, 0.7);">${data.matches.length}</strong> matching results for <strong style="color: rgba(122, 202, 255, 0.7);">"${data.query}"</strong>`;
+        }
+        list.prepend(info);
+      },
+      noResults: true,
+      maxResults: 15,
+      tabSelect: true
+    },
+    resultItem: {
+      element: (item, data) => {
+        // Modify Results Item Style
+        item.style = "display: flex; justify-content: space-between;";
+        // Modify Results Item Content
+        item.innerHTML = `
+        <span style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; color: rgba(122, 202, 255, 0.7);">
+          ${data.match}
+        </span>
+        <span style="display: flex; align-items: center; font-size: 13px; font-weight: 100; text-transform: uppercase; color: rgba(0,0,0,.2);">
+          ${data.key}
+        </span>`;
+      },
+      highlight: true
+    },
+    events: {
+      input: {
+        focus: () => {
+          if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+        }
+      }
+    }
+  });
 
-<hr>
-<%= link_to root_path do %>
-  <strong> Back to Index </strong>
-<% end %>
+  // autoCompleteJS.input.addEventListener("init", function (event) {
+  //   console.log(event);
+  // });
+
+  // autoCompleteJS.input.addEventListener("response", function (event) {
+  //   console.log(event.detail);
+  // });
+
+  // autoCompleteJS.input.addEventListener("results", function (event) {
+  //   console.log(event.detail);
+  // });
+
+  // autoCompleteJS.input.addEventListener("open", function (event) {
+  //   console.log(event.detail);
+  // });
+
+  // autoCompleteJS.input.addEventListener("navigate", function (event) {
+  //   console.log(event.detail);
+  // });
+
+  autoCompleteJS.input.addEventListener("selection", function (event) {
+    const feedback = event.detail;
+    autoCompleteJS.input.blur();
+    // Prepare User's Selected Value
+    const selection = feedback.selection.value[feedback.selection.key];
+    // Render selected choice to selection div
+    document.querySelector(".selection").innerHTML = selection;
+    // Replace Input value with the selected value
+    autoCompleteJS.input.value = selection;
+    // Console log autoComplete data feedback
+    console.log(feedback);
+  });
+
+  // autoCompleteJS.input.addEventListener("close", function (event) {
+  //   console.log(event.detail);
+  // });
+
+  // Toggle Search Engine Type/Mode
+  document.querySelector(".toggler").addEventListener("click", () => {
+    // Holds the toggle button selection/alignment
+    const toggle = document.querySelector(".toggle").style.justifyContent;
+
+    if (toggle === "flex-start" || toggle === "") {
+      // Set Search Engine mode to Loose
+      document.querySelector(".toggle").style.justifyContent = "flex-end";
+      document.querySelector(".toggler").innerHTML = "Loose";
+      autoCompleteJS.searchEngine = "loose";
+    } else {
+      // Set Search Engine mode to Strict
+      document.querySelector(".toggle").style.justifyContent = "flex-start";
+      document.querySelector(".toggler").innerHTML = "Strict";
+      autoCompleteJS.searchEngine = "strict";
+    }
+  });
+
+  // Blur/unBlur page elements
+  const action = (action) => {
+    const title = document.querySelector("h1");
+    const mode = document.querySelector(".mode");
+    const selection = document.querySelector(".selection");
+    const footer = document.querySelector(".footer");
+
+    if (action === "dim") {
+      title.style.opacity = 1;
+      mode.style.opacity = 1;
+      selection.style.opacity = 1;
+    } else {
+      title.style.opacity = 0.3;
+      mode.style.opacity = 0.2;
+      selection.style.opacity = 0.1;
+    }
+  };
+
+  // Blur/unBlur page elements on input focus
+  ["focus", "blur"].forEach((eventType) => {
+    autoCompleteJS.input.addEventListener(eventType, () => {
+      // Blur page elements
+      if (eventType === "blur") {
+        action("dim");
+      } else if (eventType === "focus") {
+        // unBlur page elements
+        action("light");
+      }
+    });
+  });
+  </script>    
+</body>
+</html>

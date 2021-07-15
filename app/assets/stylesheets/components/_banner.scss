@@ -1,0 +1,146 @@
+// Styles for the top banner on the home page
+
+// Create three grid areas (boxes) that overlap each other, essentially creating three layers.
+// Grid box 1 (layer 1): Image
+// Grid box 2 (layer 2): Gradient overlay
+// Grid box 3 (layer 3): Call to action text/content
+.top-banner-section {
+  display: grid;
+  grid-template-columns: 1fr; // stretch to the full frame
+  grid-template-rows: 350px; // 350 pixels tall
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  align-content: center;
+  justify-content: center;
+
+  .banner-image-div {
+    grid-area: 1 / 1 / 2 / 2;
+  } // image
+  .banner-overlay-div {
+    grid-area: 1 / 1 / 2 / 2;
+  } // gradient or other overlay
+  .banner-text-div {
+    grid-area: 1 / 1 / 2 / 2;
+  } // overlay objects like text, buttons, etc.
+}
+
+// Banner image (layer 1)
+.banner-image {
+  display: grid;
+  min-width: 350px; // Do not resize to smaller than this.
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // Using this so the image can be any size and still look halfway decent.
+}
+
+// Gradient overlay (layer 2)
+// gradient overlay going from black to transparent.
+// note: search for a gradient overlay generator to make this easier.
+.banner-overlay-div {
+  display: grid;
+  max-width: 100%;
+  background: black;
+  background: linear-gradient(
+    60deg,
+    rgba(0, 0, 0, 0.7777485994397759) 30%,
+    rgba(255, 255, 255, 0) 100%
+  ); // start at black at the bottom left'ish and goes at a 60% angle. This will make the white easy to read with nearly any image.
+}
+
+// Banner html components (layer 3)
+// banner text
+.banner-text-div {
+  display: grid;
+  align-items: center;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+// Typograhy: *** This is all the stuff you change
+.banner-h1-text {
+  // font can get larger, but no smaller than 10 points.
+  font-family: "Montserrat";
+  font-size: calc(20pt + 0.15vw);
+  letter-spacing: 0.05em;
+  font-weight: bolder;
+  text-transform: uppercase;
+  color: white;
+  margin-left: 10px;
+  line-height: 30px;
+}
+
+.banner-body-text {
+  // font can get larger, but no smaller than 10 points.
+  font-size: calc(15pt + 0.15vw);
+  margin-top: 0.5em;
+  color: white;
+  text-decoration: none;
+  font-family: "Work Sans";
+  margin-left: 10px;
+
+  &:hover {
+    color: white;
+  }
+  &:visited {
+    color: white;
+  }
+  &:active {
+    color: white;
+  }
+}
+
+.search-box {
+  height: 2.7rem;
+  width: 370px;
+  padding: 0 1rem 0 1.2rem;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: bolder;
+  text-overflow: ellipsis;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.747);
+  outline: 0;
+  border-radius: 10rem;
+  border: .05rem solid rgb(151, 153, 155);
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: all .4s ease;
+  -webkit-transition: all -webkit-transform .4s ease;
+}
+
+.glass-icon {
+  color: white;
+  font-size: 23px;
+  text-align: center;
+  align-items: center;
+  border: none;
+  background: rgba(112, 112, 112, 0.555);
+  border-radius: 10%;
+  width: 3rem;
+  height: 2.7rem;
+  padding-bottom: 3px;
+}
+
+.glass-icon:hover {
+  background: rgba(112, 128, 144, 0.63);
+  color: white;
+  outline:0;
+  border: none;
+  transition: transform 350ms ease-in-out;
+}
+
+// /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+@media screen and (max-width: 768px) {
+   .glass-icon {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search-box {
+    float: none;
+    width: 100%;
+    margin: 3px;
+  }
+}
