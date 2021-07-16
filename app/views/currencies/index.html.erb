@@ -36,16 +36,19 @@
       </span>
     </div>
   <!-- ============== SEARCH RESULTS STARTS / HIDDEN  ============== -->
+    
     <% if params[:crypto_search].present? %>
       <% @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search].downcase}%") %>
       <header class="header">
-        <h2>You searched for:<br></h2>
+        <h2>You searched:</h2>
         <h1> <%= "#{params[:crypto_search].to_s.upcase}" %> </h1>
+        <br>
+        <h2><strong><%= @currencies.size %></strong> Results found </h2>
       </header>  
       <div class ="rectangle">
-        <% @currencies.each do |suggestions| %>     
+        <% @currencies.each do |suggestions| %>   
             <div class="my-container">
-              <%= link_to "https://coinmarketcap.com/currencies/#{params[:crypto_search].to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
+              <%= link_to "https://coinmarketcap.com/currencies/#{suggestions.name.to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
                 <div class="card-category">
                   <ul class="my-list">
                   <li><h3><%= suggestions.name %></h3> 
@@ -67,7 +70,7 @@
       <div class ="rectangle">
         <% @currencies_info.each do |suggestions| %>     
             <div class="my-container">
-              <%= link_to "https://coinmarketcap.com/currencies/#{params[:crypto_search_info].to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
+              <%= link_to "https://coinmarketcap.com/currencies/#{suggestions.name.to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
                 <div class="card-category">
                   <ul class="my-list">
                   <li><h3><%= suggestions.name %></h3> 

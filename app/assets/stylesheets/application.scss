@@ -48,6 +48,7 @@ p {
 h1 {
   color: steelblue;
   transition: var(--transition-1);
+  font-family: $headers-font;
 }
 
 // h1 > a {
