@@ -59,7 +59,7 @@
 // Typograhy: *** This is all the stuff you change
 .banner-h1-text {
   // font can get larger, but no smaller than 10 points.
-  font-family: "Montserrat";
+  font-family: $titles;
   font-size: calc(20pt + 0.15vw);
   letter-spacing: 0.05em;
   font-weight: bolder;
