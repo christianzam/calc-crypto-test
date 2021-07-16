@@ -1,10 +1,15 @@
 class CurrenciesController < ApplicationController
-  helper_method :coin_name, :coin_price, :coin_sym, :coin_supply
+  helper_method :coin_name, :coin_price, :coin_sym, :coin_supply, :today_date
 
   def index
   end
 
   def show
+  end
+
+  def today_date
+    mytime = DateTime.now
+    mytime.strftime("#{mytime.day.ordinalize} %B %Y")
   end
 
   def coin_name(crypto_name)

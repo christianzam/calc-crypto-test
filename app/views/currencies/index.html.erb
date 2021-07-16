@@ -18,15 +18,15 @@
     <!-- The CSS grid area that displays the content (layer 3) -->
     <div class="banner-text-div">
       <span class="banner-text">
-        <p class="banner-h1-text">Remain relevant in today's <br> Crypto Currency information</p>
-        <p class="banner-body-text">Find real time results and get competitive edge</p>
+        <p class="banner-h1-text">Remain relevant in today's <br> Cryptocurrency market</p>
+        <p class="banner-body-text">Find real time info & get competitive edge</p>
         <div class="banner-search">
           <%= form_tag root_path, method: "get" do %>
             <%= text_field_tag :crypto_search,
               params[:crypto_search],
               :autocomplete => :off,
               :class => "search-box",
-              placeholder: "Search.."
+              placeholder: "Search crypto"
             %>
             <%= button_tag type: "submit", class: "glass-icon" do %>
               <%= fa_icon "search" %>
@@ -42,9 +42,9 @@
       <header class="header">
         <h2>You searched:</h2>
         <h1> <%= "#{params[:crypto_search].to_s.upcase}" %> </h1>
-        <br>
-        <h2><strong><%= @currencies.size %></strong> Results found </h2>
-      </header>  
+        <h2>Results found <strong> <%= @currencies.size %></strong></h2>
+        <p style="color: #212529;">(<%= today_date %>  - <%= Time.now.strftime("%I:%M %P") %>)</p>
+      </header>
       <div class ="rectangle">
         <% @currencies.each do |suggestions| %>   
             <div class="my-container">
@@ -64,8 +64,10 @@
     <% if params[:crypto_search_info].present? %>
       <% @currencies_info = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search_info].downcase}%") %>
       <header class="header">
-        <h2>You searched for:<br></h2>
+        <h2>You searched:</h2>
         <h1> <%= "#{params[:crypto_search_info].to_s.upcase}" %> </h1>
+        <h2>Results found <strong> <%= @currencies_info.size %></strong></h2>
+        <p style="color: #212529;">(<%= today_date %>  - <%= Time.now.strftime("%I:%M %P") %>)</p>
       </header>  
       <div class ="rectangle">
         <% @currencies_info.each do |suggestions| %>     
@@ -91,7 +93,7 @@
   <div class="info-container">
     <div class="info-paragraph">
       <my-h1>What Is Cryptocurrency?</my-h1><br>
-      <my-h1>&nbsp;Here’s What You Should Know</my-h1><br><br>
+      <br><br>
       <p class="p-l 5">
         A cryptocurrency (or “crypto”) is a digital currency that can be used to buy goods and services, 
         Cryptocurrencies work using a technology called blockchain. Blockchain is a decentralized technology 
@@ -109,34 +111,34 @@
       <div class="table-responsive">
       <table class="table">
         <tr>
-          <th>ICON</th>
+          <th></th>
           <th>Name</th>
           <th>Price</th>
           <th>Symbol</th>
           <th>MaxSupply</th>
         </tr>
-        <tr>
+        <tr onclick="window.open('https://coinmarketcap.com/currencies/bitcoin', '_blank')">
           <td><img src="bitcoin.png" style='width: 30px; height: 30px;' alt=""></td>
           <td><%= coin_name("Bitcoin") %></td>
           <td>$ <%= coin_price("Bitcoin") %> USD</td>
           <td><strong><%= coin_sym("Bitcoin") %></strong></td>
           <td><%= coin_supply("Bitcoin") %></td>
         </tr>
-        <tr>
+        <tr onclick="window.open('https://coinmarketcap.com/currencies/ethereum', '_blank')">
           <td><img src="ethereum.png" style='width: 30px; height: 30px;' alt=""></td>
           <td><%= coin_name("Ethereum") %></td>
-          <td>$ <%= coin_price("Ethereum") %> USD</td>
+          <td>$ <%= coin_price("Ethereum") %> USD </td>
           <td><strong><%= coin_sym("Ethereum")%></strong></td>
           <td><%= coin_supply("Ethereum") %></td>
         </tr>
-        <tr>
+        <tr onclick="window.open('https://coinmarketcap.com/currencies/litecoin', '_blank')">
           <td><img src="litecoin.png" style='width: 30px; height: 30px;' alt=""></td>
           <td><%= coin_name("Litecoin") %></td>
           <td>$ <%= coin_price("Litecoin") %> USD</td>
           <td><strong><%= coin_sym("Litecoin") %></strong></td>
           <td><%= coin_supply("Litecoin") %></td>
         </tr>
-        <tr>
+        <tr onclick="window.open('https://coinmarketcap.com/currencies/dogecoin', '_blank')">
           <td><img src="dogecoin.png" style='width: 30px; height: 30px;' alt=""></td>
           <td><%= coin_name("Dogecoin") %></td>
           <td>$ <%= coin_price("Dogecoin") %> USD </td>
@@ -146,13 +148,13 @@
       </table>
       </div>
       <div class ="info-search align-middle">
-        <span class ="info-label"> Real time information</span>  
+        <span class ="info-label"> Search real time information</span>  
         <%= form_tag root_path, method: "get" do %>
           <%= text_field_tag :crypto_search_info,
             params[:crypto_search_info],
             :autocomplete => :off,
             :class => "search-box",
-            placeholder: "Search.."
+            placeholder: "Search crypto"
           %>
         <% end %>
       </div>  
@@ -188,7 +190,7 @@
     </div>   
 <!-- ============== COIN CAP INFO ENDSs ============== -->    
   </div>
-<!-- ================================================== SPLIT CONTAINER ENDS ================================================== --> 
+<!-- ================================================== SPLIT CONTAINER ENDS ================================================== -->
 </body>
 </html>
 
