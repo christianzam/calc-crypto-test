@@ -32,7 +32,7 @@
               <%= fa_icon "search" %>
             <% end %>
           <% end %>
-      </div>
+        </div>
       </span>
     </div>
   <!-- ============== SEARCH RESULTS STARTS / HIDDEN  ============== -->
@@ -40,11 +40,15 @@
     <% if params[:crypto_search].present? %>
       <% @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search].downcase}%") %>
       <header class="header">
-        <h2>You searched:</h2>
+        <br>
         <h1> <%= "#{params[:crypto_search].to_s.upcase}" %> </h1>
-        <h2>Results found <strong> <%= @currencies.size %></strong></h2>
-        <p style="color: #212529;">(<%= today_date %>  - <%= Time.now.strftime("%I:%M %P") %>)</p>
+        <h2>Results <strong> <%= @currencies.size %></strong></h2>
       </header>
+      <div class="header" style="background: rgba(152, 159, 149, 0.466);">
+        <span id="tag-id"></span>
+        <br>
+        <span><%= today_date %>  - <%= Time.now.strftime("%I:%M %P") %></span>
+      </div>
       <div class ="rectangle">
         <% @currencies.each do |suggestions| %>   
             <div class="my-container">
@@ -183,6 +187,15 @@
     </div>
   </div>
 <!-- ================================================== SPLIT CONTAINER ENDS ================================================== -->
+<script>
+  var loadTime = window.performance.timing.domContentLoadedEventEnd- window.performance.timing.navigationStart; 
+
+  window.onload = function () {
+    var loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart; 
+    document.getElementById('tag-id').innerHTML = `Searched in ${loadTime/1000} seconds`;
+    console.log('Page load time is '+ loadTime);
+  }
+</script>
 </body>
 </html>
 
