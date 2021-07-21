@@ -14,11 +14,15 @@
 @import "components/info-section";
 @import "components/search-field";
 @import "components/footer";
+@import "components/preloader";
 
+// Plugins
+@import "plugins/animate";
 
 // External libraries
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome";
+
 
 body {
   margin: 0;
@@ -48,3 +52,91 @@ h1 {
   color: steelblue;
   font-family: $titles;
 }
+
+// ===============================================================================
+
+.divs {
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  color: rgb(2, 2, 53);
+  margin: 2rem;
+}
+
+.my-img {
+  text-align: center;
+  margin: 2rem;
+}
+
+.about-area-2 {
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 120px; }
+  .about-area-2 .about-image {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    top: 0;
+    right: 0; }
+    @media only screen and (min-width: 992px) and (max-width: 1199px) {
+      .about-area-2 .about-image {
+        width: 34%; } }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .about-area-2 .about-image {
+        position: relative;
+        width: 720px;
+        margin: 0 auto; } }
+    @media (max-width: 767px) {
+      .about-area-2 .about-image {
+        position: relative;
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 16px;
+        margin: 0 auto; } }
+    @media only screen and (min-width: 576px) and (max-width: 767px) {
+      .about-area-2 .about-image {
+        position: relative;
+        width: 540px;
+        margin: 0 auto; } }
+    .about-area-2 .about-image .image {
+      max-width: 580px;
+      width: 100%; }
+      @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .about-area-2 .about-image .image {
+          margin: 0 auto;
+          padding-top: 50px; } }
+      @media (max-width: 767px) {
+        .about-area-2 .about-image .image {
+          margin: 0 auto;
+          padding-top: 50px; } }
+      .about-area-2 .about-image .image img {
+        width: 100%; }
+
+.about-content-2 {
+  position: relative;
+  z-index: 9; }
+  .about-content-2 .about-icon i {
+    font-size: 64px;
+    color: #38f9d7; }
+  .about-content-2 .about-content {
+    padding-left: 15px; }
+    @media (max-width: 767px) {
+      .about-content-2 .about-content {
+        padding-left: 0;
+        padding-top: 15px; } }
+    @media only screen and (min-width: 576px) and (max-width: 767px) {
+      .about-content-2 .about-content {
+        padding-left: 15px;
+        padding-top: 0; } }
+    .about-content-2 .about-content .about-title {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 30px;
+      color: #121212; }
+    .about-content-2 .about-content .text {
+      font-size: 14px;
+      line-height: 20px;
+      color: #121212;
+      margin-top: 8px; }
+
+// ========================================================================

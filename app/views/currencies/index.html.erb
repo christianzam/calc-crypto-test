@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crypto Calculator</title>
-</head>
-<body>
+
+<!--====== PRELOADER PART START ======-->
+<div class="preloader">
+  <div class="loader">
+      <div class="ytp-spinner">
+          <div class="ytp-spinner-container">
+              <div class="ytp-spinner-rotator">
+                  <div class="ytp-spinner-left">
+                      <div class="ytp-spinner-circle"></div>
+                  </div>
+                  <div class="ytp-spinner-right">
+                      <div class="ytp-spinner-circle"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!--====== PRELOADER PART END ======-->
+
   <!-- ============== BANNER SECTION STARTS ============== -->  
   <div class="top-banner-section">
       <!-- The CSS grid area that displays the image (layer 1) -->
@@ -122,28 +133,28 @@
           <th>MaxSupply</th>
         </tr>
         <tr onclick="window.open('https://coinmarketcap.com/currencies/bitcoin', '_blank')">
-          <td><img src="bitcoin.png" style='width: 30px; height: 30px;' alt=""></td>
+          <td><%= image_tag("bitcoin.png", size: "30x30", alt: "Bitcoin Logo")%></td>  
           <td><%= coin_name("Bitcoin") %></td>
           <td>$ <%= coin_price("Bitcoin") %> USD</td>
           <td><strong><%= coin_sym("Bitcoin") %></strong></td>
           <td><%= coin_supply("Bitcoin") %></td>
         </tr>
         <tr onclick="window.open('https://coinmarketcap.com/currencies/ethereum', '_blank')">
-          <td><img src="ethereum.png" style='width: 30px; height: 30px;' alt=""></td>
+          <td><%= image_tag("ethereum.png", size: "30x30", alt: "Ethereum Logo")%></td>
           <td><%= coin_name("Ethereum") %></td>
           <td>$ <%= coin_price("Ethereum") %> USD </td>
           <td><strong><%= coin_sym("Ethereum")%></strong></td>
           <td><%= coin_supply("Ethereum") %></td>
         </tr>
         <tr onclick="window.open('https://coinmarketcap.com/currencies/litecoin', '_blank')">
-          <td><img src="litecoin.png" style='width: 30px; height: 30px;' alt=""></td>
+          <td><%= image_tag("litecoin.png", size: "30x30", alt: "litecoin Logo")%></td>
           <td><%= coin_name("Litecoin") %></td>
           <td>$ <%= coin_price("Litecoin") %> USD</td>
           <td><strong><%= coin_sym("Litecoin") %></strong></td>
           <td><%= coin_supply("Litecoin") %></td>
         </tr>
         <tr onclick="window.open('https://coinmarketcap.com/currencies/dogecoin', '_blank')">
-          <td><img src="dogecoin.png" style='width: 30px; height: 30px;' alt=""></td>
+          <td><%= image_tag("dogecoin.png", size: "30x30", alt: "dogecoin Logo")%></td>
           <td><%= coin_name("Dogecoin") %></td>
           <td>$ <%= coin_price("Dogecoin") %> USD </td>
           <td><strong><%= coin_sym("Dogecoin") %></strong></td>
@@ -187,6 +198,20 @@
     </div>
   </div>
 <!-- ================================================== SPLIT CONTAINER ENDS ================================================== -->
+
+  <div class="my-img wow fadeIn" data-wow-duration="2.5s" data-wow-delay="1.2s">
+    <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1966&q=80" style="width: 300px; height:300px" alt="">
+  </div>
+  <div class="divs wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.7s">
+    <h3>Odio quam dolorum minus molestiae.</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A tempore sed, id expedita numquam odit sequi aliquid commodi aliquam cum debitis neque facere modi ipsum quidem rem sint? Non saepe illo nam expedita veritatis voluptas consequuntur ea excepturi similique explicabo obcaecati, consectetur dolores est repellendus dignissimos neque sapiente. Maxime placeat fuga ea beatae doloribus harum molestiae omnis, dicta explicabo nam error praesentium repudiandae, expedita esse eveniet provident architecto! Quos ad error magnam eaque sapiente ipsam adipisci hic, nobis, velit maiores, nisi facere voluptas suscipit officiis repellendus accusamus similique. Quis, officiis asperiores. Eum temporibus ut, iusto odit inventore blanditiis est quos.</p>
+    <p>Optio impedit ipsum omnis fuga incidunt alias corrupti velit! Eligendi aspernatur dolor animi vitae ipsam at natus, nisi commodi blanditiis!</p>
+  </div>
+  <div class="divs wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.7s">
+    <h3>Ut ex est placeat porro.</h3>
+    <p>Facilis quisquam corporis dolores voluptate cumque eligendi ad id neque veniam iusto voluptatem libero quia vel, aliquid unde ea dolorum?</p>
+  </div>
+
 <script>
   var loadTime = window.performance.timing.domContentLoadedEventEnd- window.performance.timing.navigationStart; 
 
@@ -196,8 +221,27 @@
     console.log('Page load time is '+ loadTime);
   }
 </script>
-</body>
-</html>
+  
+  <!--====== jquery js ======-->
+  <script src="jquery-1.12.4.min.js"></script>
+  <%# <script asset_path(jquery-1.12.4.min.js, skip_pipeline: true)></script> %>
+  <!--====== Slick js ======-->
+  <script src="slick.min.js"></script>
+  <%# <script asset_path(slick.min.js, skip_pipeline: true)></script> %>
+  <!--====== Images Loaded js ======-->
+  <script src="imagesloaded.pkgd.min.js"></script>
+  <%# <script asset_path(imagesloaded.pkgd.min.js, skip_pipeline: true)></script> %>
+  <!--====== Magnific Popup js ======-->
+  <script src="jquery.magnific-popup.min.js"></script>
+  <%# <script asset_path(jquery.magnific-popup.min.js, skip_pipeline: true)></script>   %>
+  <!--====== wow js ======-->
+  <script src="wow.min.js"></script>
+  <%# <script asset_path(wow.min.js, skip_pipeline: true)></script> %>
+  <!--====== main js ======-->
+  <script src="main.js"></script>
+  <%# <script asset_path(main.js, skip_pipeline: true)></script> %>
+
+
 
 <!--
         <h3> <% currency = Currency.first %> </h3>
