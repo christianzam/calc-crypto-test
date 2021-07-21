@@ -27,7 +27,7 @@
     <!-- The CSS grid area that displays the semi-transparent gradient overlay (layer 2) -->
     <div class="banner-overlay-div"></div>
     <!-- The CSS grid area that displays the content (layer 3) -->
-    <div class="banner-text-div">
+    <div class="banner-text-div wow fadeInDown" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50">
       <span class="banner-text">
         <p class="banner-h1-text">Remain relevant in today's <br> Cryptocurrency market</p>
         <p class="banner-body-text">Find real time info & get competitive edge</p>
@@ -79,11 +79,15 @@
     <% if params[:crypto_search_info].present? %>
       <% @currencies_info = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search_info].downcase}%") %>
       <header class="header">
-        <h2>You searched:</h2>
+        <br>
         <h1> <%= "#{params[:crypto_search_info].to_s.upcase}" %> </h1>
-        <h2>Results found <strong> <%= @currencies_info.size %></strong></h2>
-        <p style="color: #212529;">(<%= today_date %>  - <%= Time.now.strftime("%I:%M %P") %>)</p>
-      </header>  
+        <h2>Results <strong> <%= @currencies_info.size %></strong></h2>
+      </header>
+      <div class="header" style="background: rgba(152, 159, 149, 0.466);">
+        <span id="tag-id"></span>
+        <br>
+        <span><%= today_date %>  - <%= Time.now.strftime("%I:%M %P") %></span>
+      </div>  
       <div class ="rectangle">
         <% @currencies_info.each do |suggestions| %>     
             <div class="my-container">
@@ -106,7 +110,7 @@
 
 <!-- ============== INFO CONTAINER SECTION START ============== -->
   <div class="info-container">
-    <div class="info-paragraph">
+    <div class="info-paragraph wow fadeInUp" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50">
       <my-h1>What Is Cryptocurrency?</my-h1><br>
       <br><br>
       <p class="p-l 5">
@@ -122,7 +126,7 @@
       <a href="https://en.wikipedia.org/wiki/Digital_currency" target ="blank">More info</a>
       </p>  
     </div>
-    <div class="info-table">
+    <div class="info-table wow fadeInRight" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50">
       <div class="table-responsive">
       <table class="table">
         <tr>
@@ -182,7 +186,7 @@
 -->
 <!-- ================================================== SPLIT CONTAINER STARTS ================================================== -->
   <div class="split">       
-    <div class="text-div">
+    <div class="text-div wow fadeInLeft" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50">
       <my-h1>Buy and protect yourself</my-h1><br><br>
         <p>
           If you’re looking to buy a cryptocurrency in an ICO, read the fine print in the company’s prospectus for this information: 
@@ -194,23 +198,10 @@
           Is the currency already developed, or is the company looking to raise money to develop it? The further along the product, the less risky it is.<br><br>
         </p>
     </div>
-    <div class="img-div" style="background-image: url(https://images.unsplash.com/photo-1612696877544-9796e268bfcf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1897&q=80)">
+    <div class="img-div wow fadeInRight" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50" style="background-image: url(https://images.unsplash.com/photo-1612696877544-9796e268bfcf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1897&q=80)">
     </div>
   </div>
 <!-- ================================================== SPLIT CONTAINER ENDS ================================================== -->
-
-  <div class="my-img wow fadeIn" data-wow-duration="2.5s" data-wow-delay="1.2s">
-    <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1966&q=80" style="width: 300px; height:300px" alt="">
-  </div>
-  <div class="divs wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.7s">
-    <h3>Odio quam dolorum minus molestiae.</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A tempore sed, id expedita numquam odit sequi aliquid commodi aliquam cum debitis neque facere modi ipsum quidem rem sint? Non saepe illo nam expedita veritatis voluptas consequuntur ea excepturi similique explicabo obcaecati, consectetur dolores est repellendus dignissimos neque sapiente. Maxime placeat fuga ea beatae doloribus harum molestiae omnis, dicta explicabo nam error praesentium repudiandae, expedita esse eveniet provident architecto! Quos ad error magnam eaque sapiente ipsam adipisci hic, nobis, velit maiores, nisi facere voluptas suscipit officiis repellendus accusamus similique. Quis, officiis asperiores. Eum temporibus ut, iusto odit inventore blanditiis est quos.</p>
-    <p>Optio impedit ipsum omnis fuga incidunt alias corrupti velit! Eligendi aspernatur dolor animi vitae ipsam at natus, nisi commodi blanditiis!</p>
-  </div>
-  <div class="divs wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.7s">
-    <h3>Ut ex est placeat porro.</h3>
-    <p>Facilis quisquam corporis dolores voluptate cumque eligendi ad id neque veniam iusto voluptatem libero quia vel, aliquid unde ea dolorum?</p>
-  </div>
 
 <script>
   var loadTime = window.performance.timing.domContentLoadedEventEnd- window.performance.timing.navigationStart; 
