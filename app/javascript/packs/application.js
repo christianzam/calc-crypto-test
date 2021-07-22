@@ -6,6 +6,19 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("packs/hello")
+require("packs/ajax-contact-min")
+require("packs/application")
+require("packs/imagesloaded.pkgd.min-min")
+require("packs/imagesloaded.pkgd.min")
+require("packs/jquery-1.12.4.min")
+require("packs/jquery.magnific-popup.min-min")
+require("packs/jquery.magnific-popup.min")
+require("packs/slick.min-min")
+require("packs/slick.min")
+require("packs/wow.min")
+
+
 
 import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap';
