@@ -1,4 +1,8 @@
 /*===== All Preloader Style =====*/
+.preloader-text {
+  color: #244a9e;
+  font-family: $links;
+}
 .preloader {
   /* Body Overlay */
   position: fixed;
@@ -64,7 +68,7 @@
       height: 100%;
       border-style: solid;
       /* Spinner Color */
-      border-color: #38f9d7 #38f9d7 #cbced1;
+      border-color: #11234b #244a9e #1857e0 #cbced1;
       border-radius: 50%;
       border-width: 6px; }
     .preloader .loader .ytp-spinner-left .ytp-spinner-circle {
