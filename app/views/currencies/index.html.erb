@@ -1,25 +1,3 @@
-<!--====== PRELOADER PART START ======-->
-<!--
-<div class="preloader">
-  <div class="loader">
-    <br><br><br><br><span> Searching...</span>
-      <div class="ytp-spinner">
-          <div class="ytp-spinner-container">
-              <div class="ytp-spinner-rotator">
-                  <div class="ytp-spinner-left">
-                      <div class="ytp-spinner-circle"></div>
-                  </div>
-                  <div class="ytp-spinner-right">
-                      <div class="ytp-spinner-circle"></div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
--->
-<!--====== PRELOADER PART END ======-->
-
   <!-- ============== BANNER SECTION STARTS ============== -->  
   <div class="top-banner-section">
       <!-- The CSS grid area that displays the image (layer 1) -->
@@ -29,7 +7,7 @@
     <!-- The CSS grid area that displays the semi-transparent gradient overlay (layer 2) -->
     <div class="banner-overlay-div"></div>
     <!-- The CSS grid area that displays the content (layer 3) -->
-    <div class="banner-text-div wow fadeInDown" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50">
+    <div class="banner-text-div wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.8s" data-wow-offset="50">
       <span class="banner-text">
         <p class="banner-h1-text">Remain relevant in today's <br> Cryptocurrency market</p>
         <p class="banner-body-text">Find real time info & get competitive edge</p>
@@ -60,7 +38,7 @@
       <div class="header" style="background: rgba(152, 159, 149, 0.466);">
         <span id="tag-id"></span>
         <br>
-        <span><%= today_date %>  - <%= Time.now.strftime("%I:%M %P") %></span>
+        <span><%= today_date %>  - <span id="id-local-time"></span></span>
       </div>
       <div class ="rectangle">
         <% @currencies.each do |suggestions| %>   
@@ -88,7 +66,7 @@
       <div class="header" style="background: rgba(152, 159, 149, 0.466);">
         <span id="tag-id"></span>
         <br>
-        <span><%= today_date %>  - <%= Time.now.strftime("%I:%M %P") %></span>
+        <span><%= today_date %>  - <span id="id-local-time"></span></span>
       </div>  
       <div class ="rectangle">
         <% @currencies_info.each do |suggestions| %>     
@@ -112,7 +90,7 @@
 
 <!-- ============== INFO CONTAINER SECTION START ============== -->
   <div class="info-container">
-    <div class="info-paragraph wow fadeInUp" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50">
+    <div class="info-paragraph wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.8s" data-wow-offset="50">
       <my-h1>What Is Cryptocurrency?</my-h1><br>
       <br><br>
       <p class="p-l 5">
@@ -128,7 +106,7 @@
       <a href="https://en.wikipedia.org/wiki/Digital_currency" target ="blank">More info</a>
       </p>  
     </div>
-    <div class="info-table wow fadeInRight" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50">
+    <div class="info-table wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.8s" data-wow-offset="50">
       <div class="table-responsive">
       <table class="table">
         <tr>
@@ -188,7 +166,7 @@
 -->
 <!-- ================================================== SPLIT CONTAINER STARTS ================================================== -->
   <div class="split">       
-    <div class="text-div wow fadeInLeft" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50">
+    <div class="text-div wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.8s" data-wow-offset="50">
       <div class="my-container-1">
       <div class="row">
           <div class="col">
@@ -254,35 +232,18 @@
   </div> <!-- container -->
     
     </div>
-    <div class="img-div wow fadeInRight" data-wow-duration="1.7s" data-wow-delay="0.8s" data-wow-offset="50" style="background-image: url(https://images.unsplash.com/photo-1612696877544-9796e268bfcf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1897&q=80)">
+    <div class="img-div wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.8s" data-wow-offset="50" style="background-image: url(https://images.unsplash.com/photo-1612696877544-9796e268bfcf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1897&q=80)">
     </div>
   </div>
 <!-- ================================================== SPLIT CONTAINER ENDS ================================================== -->
 
 <script>new WOW({live: false}).init()</script>
 <script>
-  var loadTime = window.performance.timing.domContentLoadedEventEnd- window.performance.timing.navigationStart; 
-
   window.onload = function () {
-    var loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart; 
-    document.getElementById('tag-id').innerHTML = `Searched in ${loadTime/1000} seconds`;
-    console.log('Page load time is '+ loadTime);
+    let loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart; 
+    document.getElementById('tag-id').innerHTML = `Found in ${loadTime/1000} seconds`;
   }
-</script>
-  
-  <!--====== jquery js ======-->
-  <%# <script src="jquery-1.12.4.min.js"></script> %>
-  <!--====== Slick js ======-->
-  <%# <script src="slick.min.js"></script> %>
-  <!--====== Images Loaded js ======-->
-  <%# <script src="imagesloaded.pkgd.min.js"></script> %>
-  <!--====== Magnific Popup js ======-->
-  <%# <script src="jquery.magnific-popup.min.js"></script> %>
-  <!--====== wow js ======-->
-  <%# <script src="wow.min.js"></script> %>
-  <!--====== main js ======-->
-  <%# <script src="main.js"></script> %>
-  
+</script>  
 
 <!--
         <h3> <% currency = Currency.first %> </h3>

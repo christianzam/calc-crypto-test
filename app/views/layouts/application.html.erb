@@ -13,6 +13,7 @@
   </head>
 
   <body>
+    <%#= render "components/preloader" unless controller_name == 'errors' %>
     <%= yield %>
     <%= render "components/footer" unless controller_name == 'errors'%>
   </body>
