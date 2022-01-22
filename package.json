@@ -2,12 +2,6 @@
   "name": "calc_crypto_test",
   "private": true,
   "version": "0.1.0",
-  "engines": {
-    "node": "10.22.1"
-  },
-  "scripts": {
-    "start": "app/javascript/channels/index.js"
-  },
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"
   },
