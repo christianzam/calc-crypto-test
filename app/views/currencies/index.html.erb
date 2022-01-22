@@ -43,12 +43,12 @@
       <div class ="rectangle">
         <% @currencies.each do |suggestions| %>   
             <div class="my-container">
-              <%= link_to "https://coinmarketcap.com/currencies/#{suggestions.name.to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
+              <%= link_to "https://api.coingecko.com/api/v3/coins/#{suggestions.name.to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
                 <div class="card-category">
                   <ul class="my-list">
                   <li><h3><%= suggestions.name %></h3> 
                   <li><strong><%=suggestions.currency_symbol%></strong></li>
-                  <li><%= "$ #{suggestions.current_price.round(4)} USD" %></li>
+                  <li><%= "$ #{suggestions.current_price} USD" %></li>
                   </ul>
                 </div>
               <% end %>
@@ -71,12 +71,12 @@
       <div class ="rectangle">
         <% @currencies_info.each do |suggestions| %>     
             <div class="my-container">
-              <%= link_to "https://coinmarketcap.com/currencies/#{suggestions.name.to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
+              <%= link_to "https://api.coingecko.com/api/v3/coins/#{suggestions.name.to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
                 <div class="card-category">
                   <ul class="my-list">
                   <li><h3><%= suggestions.name %></h3> 
                   <li><strong><%=suggestions.currency_symbol%></strong></li>
-                  <li><%= "$ #{suggestions.current_price.round(4)} USD" %></li>
+                  <li><%= "$ #{suggestions.current_price} USD" %></li>
                   </ul>
                 </div>
               <% end %>
@@ -108,7 +108,7 @@
     </div>
     <div class="info-table wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.8s" data-wow-offset="50">
       <div class="table-responsive">
-      <table class="table">
+            <table class="table">
         <tr>
           <th></th>
           <th>Name</th>
@@ -116,28 +116,28 @@
           <th>Symbol</th>
           <th>MaxSupply</th>
         </tr>
-        <tr onclick="window.open('https://coinmarketcap.com/currencies/bitcoin', '_blank')">
+        <tr onclick="window.open('https://www.coingecko.com/en/coins/bitcoin', '_blank')">
           <td><%= image_tag("bitcoin.png", size: "30x30", alt: "Bitcoin Logo")%></td>  
           <td><%= coin_name("Bitcoin") %></td>
           <td>$ <%= coin_price("Bitcoin") %> USD</td>
           <td><strong><%= coin_sym("Bitcoin") %></strong></td>
           <td><%= coin_supply("Bitcoin") %></td>
         </tr>
-        <tr onclick="window.open('https://coinmarketcap.com/currencies/ethereum', '_blank')">
+        <tr onclick="window.open('https://www.coingecko.com/en/coins/ethereum', '_blank')">
           <td><%= image_tag("ethereum.png", size: "30x30", alt: "Ethereum Logo")%></td>
           <td><%= coin_name("Ethereum") %></td>
           <td>$ <%= coin_price("Ethereum") %> USD </td>
           <td><strong><%= coin_sym("Ethereum")%></strong></td>
           <td><%= coin_supply("Ethereum") %></td>
         </tr>
-        <tr onclick="window.open('https://coinmarketcap.com/currencies/litecoin', '_blank')">
+        <tr onclick="window.open('https://www.coingecko.com/en/coins/litecoin', '_blank')">
           <td><%= image_tag("litecoin.png", size: "30x30", alt: "litecoin Logo")%></td>
           <td><%= coin_name("Litecoin") %></td>
           <td>$ <%= coin_price("Litecoin") %> USD</td>
           <td><strong><%= coin_sym("Litecoin") %></strong></td>
           <td><%= coin_supply("Litecoin") %></td>
         </tr>
-        <tr onclick="window.open('https://coinmarketcap.com/currencies/dogecoin', '_blank')">
+        <tr onclick="window.open('https://www.coingecko.com/en/coins/dogecoin', '_blank')">
           <td><%= image_tag("dogecoin.png", size: "30x30", alt: "dogecoin Logo")%></td>
           <td><%= coin_name("Dogecoin") %></td>
           <td>$ <%= coin_price("Dogecoin") %> USD </td>
@@ -244,15 +244,3 @@
     document.getElementById('tag-id').innerHTML = `Found in ${loadTime/1000} seconds`;
   }
 </script>  
-
-<!--
-        <h3> <% currency = Currency.first %> </h3>
-        <span>The first currency of the Seeds File is: <strong><%= currency.name %></strong></span>
-        <ul style="list-style-type: none;">
-        <li>From the API it costs: <%= currency.current_price %></li>
-        <li>The total of 4 of those is: <%= currency.calculate_value(4) %></li>
-        <li>From the API current name: <%= currency.current_name %> </li>
-        <li>From DB symbol: <%= currency.currency_symbol %></li>
-        <li>The slug: <%= currency.slug %></li>
-        </ul>
--->

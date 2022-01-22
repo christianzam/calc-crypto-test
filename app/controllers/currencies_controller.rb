@@ -20,7 +20,7 @@ class CurrenciesController < ApplicationController
 
   def coin_price(crypto_name)
     array = Currency.all
-    price = array.select { |x| return x.current_price.round(3).to_s if x.name == crypto_name.to_s }
+    price = array.select { |x| return x.current_price if x.name == crypto_name.to_s }
     price.to_s
   end
 
@@ -35,28 +35,28 @@ class CurrenciesController < ApplicationController
     supply = array.select { |x| return x.max_supply.to_f.to_s if x.name == crypto_name.to_s }
     supply.to_s
   end
-  
-  # def search_suggestions
-  #   return unless params[:crypto_search].present?
 
-  #   @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search].downcase}%")
-  #   @currencies.collect(&:name)
-  # end
+  def search_suggestions
+    return unless params[:crypto_search].present?
 
-  # def search
-  #   @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:search].downcase}%")
-  #   render json: {currencies: @currencies}
-  # end
+    @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:crypto_search].downcase}%")
+    @currencies.collect(&:name)
+  end
 
-  # def calculate
-  #   amount = params[:amount]
-  #   render json: {
-  #     currency: currency,
-  #     current_price: currency.current_price,
-  #     amount: amount, 
-  #     value: currency.calculate_value(amount)
-  #   }
-  # end
+  def search
+    @currencies = Currency.where('LOWER(name) LIKE ?', "%#{params[:search].downcase}%")
+    render json: {currencies: @currencies}
+  end
+
+  def calculate
+    amount = params[:amount]
+    render json: {
+      currency: currency,
+      current_price: currency.current_price,
+      amount: amount,
+      value: currency.calculate_value(amount)
+    }
+  end
 
   private
 
