@@ -44,7 +44,7 @@
         <% @currencies.each do |suggestions| %>   
             <div class="my-container">
               <%= link_to "https://api.coingecko.com/api/v3/coins/#{suggestions.name.to_s.downcase}", :target => "_blank", :class => "card-links" do %> 
-                <div class="card-category">
+                <div class="card-category wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.8s" data-wow-offset="50">
                   <ul class="my-list">
                   <li><h3><%= suggestions.name %></h3> 
                   <li><strong><%=suggestions.currency_symbol%></strong></li>
@@ -236,11 +236,12 @@
     </div>
   </div>
 <!-- ================================================== SPLIT CONTAINER ENDS ================================================== -->
-
-<script>new WOW({live: false}).init()</script>
+<script>
+  new WOW({live: false}).init()
+</script>
 <script>
   window.onload = function () {
     let loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart; 
     document.getElementById('tag-id').innerHTML = `Found in ${loadTime/1000} seconds`;
   }
-</script>  
+</script>
