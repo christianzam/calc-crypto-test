@@ -1,6 +1,9 @@
 {
   "name": "crypto_currency_info",
   "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "@rails/actioncable": "^6.0.0",
